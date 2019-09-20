@@ -1,0 +1,1 @@
+export const Parties = [{ id: 1, party: "APC" }, { id: 2, party: "PDP" }]
