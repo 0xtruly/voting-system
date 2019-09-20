@@ -5,7 +5,7 @@ import { Parties } from "../parties";
 const Votes = () => {
     const [voter_card_no, setVoter_card_no] = useState("");
     const [party, setParty] = useState("");
-    const [master, setMaster] = useState([]);
+    const [masterList, setMasterList] = useState([]);
     const [apcVote, setApcVote] = useState([]);
     const [pdpVote, setPdpVote] = useState([]);
 
@@ -31,41 +31,51 @@ const Votes = () => {
           voter_card_no: voter_card_no,
           party: party
         };
-
+        
         let Party = party;
+        console.log(Party);
         switch (Party)
         {
 
           case "APC":
-            if (master.length <= 1) {
+            if (masterList.length <= 1) {
               setApcVote([...apcVote, votes]);
-              setMaster([...master, votes]);
+              setMasterList([masterList, votes]);
+              
+              console.log(masterList);
             } else {
-              master.map(apc =>  {
-                console.log(apc);
-                if (apc.voter_card_no === voter_card_no) {
+              masterList.map(voter =>  {
+                console.log(voter);
+                if (voter.voter_card_no === voter_card_no) {
+                  console.log(voter_card_no)
                   alert("Already voted");
+                  setMasterList("");
+                  setVoter_card_no("");
                   return false;
-                } else {
-                  setApcVote([...apcVote, votes]);
-                }
+                } 
+                
+                return voter;
               });
             }
     
             break;
-            
+
           case "PDP":
-            if (master.length <= 1) {
+            if (masterList.length <= 1) {
               setPdpVote([...pdpVote, votes]);
-              setMaster([...master, votes]);
+              setMasterList([masterList, votes]);
+              
             } else {
-              master.map(pdp => {
-                if (pdp.voter_card_no === voter_card_no) {
+              masterList.map(voter => {
+                  console.log(voter)
+                if (voter.voter_card_no === voter_card_no) {
                   alert("Already voted");
+                  setVoter_card_no("");
+                  setMasterList("")
                   return false;
-                } else {
-                  setPdpVote([...pdpVote, votes]);
-                }
+                } 
+                
+                return voter;
               });
             }
     
@@ -74,6 +84,7 @@ const Votes = () => {
           default:
             break;
         }
+       
     };
 
       return(
