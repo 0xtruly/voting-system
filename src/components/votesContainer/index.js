@@ -5,7 +5,7 @@ import { Parties } from "../parties";
 const Votes = () => {
     const [voter_card_no, setVoter_card_no] = useState("");
     const [party, setParty] = useState("");
-    const [masterList, setMasterList] = useState([]);
+    const [masterList, setMasterList] = useState([]); //*****Store Votes here for validation*****
     const [apcVote, setApcVote] = useState([]);
     const [pdpVote, setPdpVote] = useState([]);
 
@@ -33,52 +33,77 @@ const Votes = () => {
         };
         
         let Party = party;
-        console.log(Party);
+        // console.log(Party);
         switch (Party)
         {
 
           case "APC":
-            if (masterList.length <= 1) {
-              setApcVote([...apcVote, votes]);
-              setMasterList([masterList, votes]);
-              
-              console.log(masterList);
-            } else {
-              masterList.map(voter =>  {
-                console.log(voter);
-                if (voter.voter_card_no === voter_card_no) {
-                  console.log(voter_card_no)
-                  alert("Already voted");
-                  setMasterList("");
-                  setVoter_card_no("");
-                  return false;
+
+            if (masterList.length < 1) 
+            {
+                masterList.push(votes)
+                // console.log(masterList);
+                if (party === "APC") {
+                  setApcVote([...apcVote, votes]);
+                }   
+            } 
+
+            else 
+            {
+              for (let i = 0; i < masterList.length; i += 1) {
+                if (masterList.length >= 1 && !(masterList[i].voter_card_no).includes(voter_card_no)) {
+                  setMasterList([...masterList, votes])
+                  // console.log(masterList[i]);
+                  for (let i = 0; i < masterList.length; i += 1) {
+                    // console.log(masterList[i].voter_card_no);
+                    if (!(masterList[i].voter_card_no).includes(voter_card_no)) {
+                      setApcVote([...apcVote, votes]);
+                    } 
+                    else if((masterList[i].voter_card_no).includes(voter_card_no)) {
+                      alert("You can't vote twice")
+                      setApcVote([...apcVote]);
+                      return false;
+                    }
+                  } 
                 } 
-                
-                return voter;
-              });
+              }
             }
-    
+
+            
             break;
 
           case "PDP":
-            if (masterList.length <= 1) {
-              setPdpVote([...pdpVote, votes]);
-              setMasterList([masterList, votes]);
-              
-            } else {
-              masterList.map(voter => {
-                  console.log(voter)
-                if (voter.voter_card_no === voter_card_no) {
-                  alert("Already voted");
-                  setVoter_card_no("");
-                  setMasterList("")
-                  return false;
+
+            if (masterList.length < 1) 
+            { //**** Check if masterList is empty */
+                masterList.push(votes)      
+                // console.log(masterList);
+                if (party === "PDP") {
+                  setPdpVote([...pdpVote, votes]);
                 } 
-                
-                return voter;
-              });
+            } 
+
+            else 
+            {
+              for (let i = 0; i < masterList.length; i += 1) 
+              {
+                if (masterList.length >= 1 && !(masterList[i].voter_card_no).includes(voter_card_no)) {
+                  setMasterList([...masterList, votes])
+                  // console.log(masterList[i]);
+                  for (let i = 0; i < masterList.length; i += 1) {
+                    // console.log(masterList[i].voter_card_no);
+                    if (!(masterList[i].voter_card_no).includes(voter_card_no)) {  
+                      setPdpVote([...pdpVote, votes]);
+                    } 
+                    else if((masterList[i].voter_card_no).includes(voter_card_no)) {
+                      alert("You can't vote twice")
+                      setPdpVote([...pdpVote]);
+                      return false;
+                    }
+                  }     
+                } 
+              }
             }
-    
             break;
     
           default:
