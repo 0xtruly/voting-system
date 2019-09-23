@@ -1,5 +1,7 @@
-
-
+.voter-form{
+  height: 200px;
+  width: 300px;
+}
 
 .App {
   text-align: center;
