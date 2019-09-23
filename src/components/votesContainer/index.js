@@ -114,11 +114,11 @@ const Votes = () => {
 
       return(
           <div className="container text-center">
-            <form className="voter-form col-md-12 margin-btm">
-                <div className="form-col row">
+            <form className="voter-form col-md-12 mb-3 w-100 h-75">
+                <div className="form-col row shadow m-5 p-5">
                   <div className=" col-md-6">
                     <label htmlFor="votersName">Voters Name:</label>
-                    <select onChange={handleCardNo} className="margin-btm">
+                    <select onChange={handleCardNo} className="mb-3">
                             <option>[-select Voter-]</option>
                             {Voters.map(vote => (
                               <option value={vote.voter_card_no} key={vote.voter_card_no}>
@@ -129,7 +129,7 @@ const Votes = () => {
                   </div>
                   <div className="col-md-6">
                     <label htmlFor="votersCardNo">Select Party</label>
-                    <select onChange={handleParty} className="margin-btm">
+                    <select onChange={handleParty} className="mb-3">
                             <option>[-select Party-]</option>
                             {Parties.map(party => (
                               <option value={party.party} key={party.id}>
@@ -140,7 +140,7 @@ const Votes = () => {
                   </div>
                     <button
                       type="submit"
-                      className="btn btn-primary margin-btm mx-auto"
+                      className="btn btn-primary mb-3 mx-auto"
                       onClick={submission}
                     >
                       Submit
