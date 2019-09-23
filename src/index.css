@@ -13,22 +13,20 @@ code {
     monospace;
 }
 
-.voter-form{
+/* .voter-form{
   height: 200px;
   width: 350px;
-}
+} */
 
-.form-col {
+/* .form-col {
   margin: 2rem 5rem;
   border: 1px solid #0000002b;
   box-shadow: -1px 5px 9px 1px #7777776e;
   border-radius: 5px;
   padding: 3rem;
-}
+} */
 
-.margin-btm{
-  margin-bottom: 10px;
-}
+
 .font-anton{
   font-family: 'Anton', sans-serif;
   font-size: 2em;
